@@ -1,3 +1,0 @@
-/home/ksmirnov/local/Software_Patterns_Test/PathReferencePointCalculator/build/CMakeFiles/rebuild_cache.dir
-/home/ksmirnov/local/Software_Patterns_Test/PathReferencePointCalculator/build/CMakeFiles/edit_cache.dir
-/home/ksmirnov/local/Software_Patterns_Test/PathReferencePointCalculator/build/CMakeFiles/PathDataProviderTest.dir
