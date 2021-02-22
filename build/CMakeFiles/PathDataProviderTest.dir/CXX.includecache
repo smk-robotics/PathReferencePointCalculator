@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/PathDataProvider/AbstractPathDataProvider.h
+utility
+-
+list
+-
+
+/home/ksmirnov/local/Software_Patterns_Test/PathReferencePointCalculator/test/PathDataProviderTest.cpp
+gtest/gtest.h
+-
+AbstractPathDataProvider.h
+/home/ksmirnov/local/Software_Patterns_Test/PathReferencePointCalculator/test/AbstractPathDataProvider.h
+
