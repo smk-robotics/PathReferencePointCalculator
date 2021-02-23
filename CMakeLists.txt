@@ -15,6 +15,7 @@ target_include_directories(PathDataProvider PUBLIC
 # Linking our gtest, gmock and benchmark libraries (from third-party).
 set(GTEST_DIR ${PROJECT_SOURCE_DIR}/third-party/out/lib)
 set(GTEST_ROOT ${PROJECT_SOURCE_DIR}/third-party/out/lib)
+set(GTEST_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/third-party/out/include)
 include_directories(${PROJECT_SOURCE_DIR}/third-party/out/include)
 
 find_package(GTest REQUIRED)
