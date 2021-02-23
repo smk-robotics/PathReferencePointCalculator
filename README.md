@@ -2,3 +2,6 @@
 
 # PathReferencePointCalculator
 Path reference point calculator for autonomous car.
+
+# Maintainer
+* Smirnov Kirill <smk-robotics@gmail.com>
