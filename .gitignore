@@ -43,5 +43,8 @@
 # QtCreator config files
 *.user
 
-# Build directory
+# Main build directory
 build/*
+
+# Third party build directory
+third-party/out/*
