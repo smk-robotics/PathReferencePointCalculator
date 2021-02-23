@@ -12,8 +12,13 @@ target_include_directories(PathDataProvider PUBLIC
     include/PathDataProvider
 )
 
+# Linking our gtest, gmock and benchmark libraries (from third-party).
+set(GTEST_DIR ${PROJECT_SOURCE_DIR}/third-party/out/lib)
 set(GTEST_ROOT ${PROJECT_SOURCE_DIR}/third-party/out/lib)
+set(GTEST_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/third-party/out/include)
 find_package(GTest REQUIRED)
+# Checking, that used our gtest library (from third-party).
+message("${PROJECT_NAME} -> GTEST_LIBRARIES - ${GTEST_LIBRARIES}")
 
 add_executable(PathDataProviderTest
     test/PathDataProviderTest.cpp
