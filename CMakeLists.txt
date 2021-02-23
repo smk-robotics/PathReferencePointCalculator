@@ -2,9 +2,13 @@ cmake_minimum_required(VERSION 3.10.0)
 project(PathReferencePointCalculator VERSION 1.0.0)
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(PathDataProvider INTERFACE)
+file(GLOB PATH_DATA_PROVIDER_SOURCES CONFIGURE_DEPENDS src/PathDataProvider/*.cpp)
 
-target_include_directories(PathDataProvider INTERFACE
+add_library(PathDataProvider
+  ${PATH_DATA_PROVIDER_SOURCES}
+)
+
+target_include_directories(PathDataProvider PUBLIC
     include/PathDataProvider
 )
 
