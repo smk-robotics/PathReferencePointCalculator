@@ -3,7 +3,9 @@
 #include <stdexcept>
 #include "TextPathDataProvider.h"
 
-std::vector<std::pair<float, float>> TextPathDataProvider::getPathFromFile(const std::string &fileName) const {
+using namespace path_reference_point_calculator::path_data_provider;
+
+std::vector<std::pair<float, float>> TextPathDataProvider::getPathFromFile(const std::string &fileName) const noexcept {
   if (!this->fileNameValid(fileName) || !this->fileExists(fileName)) {
     return {};
   }
@@ -12,7 +14,8 @@ std::vector<std::pair<float, float>> TextPathDataProvider::getPathFromFile(const
     std::cerr << "[TextPathDataProvider] - Can't open " << fileName << " file!" << std::endl;
     return {};
   }
-  float x = 0.0f, y = 0.0f;
+  float x = 0.0f;
+  float y = 0.0f;
   std::vector<std::pair<float, float>> path;
   while (pathFile >> x >> y) {
     path.push_back(std::make_pair(x, y));
