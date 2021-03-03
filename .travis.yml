@@ -5,9 +5,9 @@ language: cpp
 install:
   - cd third-party && ./build_third_party.sh && cd -
   - mkdir -p build && cd build
-  - cmake .. && cmake --build . --target all
+  - cmake -DBUILD_TESTS=ON ..
+  - cmake --build . --target all
 script:
-  - pwd
   - ctest --verbose
 notifications:
   email:
