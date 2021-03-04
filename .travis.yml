@@ -1,15 +1,15 @@
 sudo: required
 dist: bionic
-language: generic
+language: cpp
 
 install:
   - cd third-party && ./build_third_party.sh && cd -
   - mkdir -p build && cd build
-  - cmake .. && cmake --build . --target all
-
+  - cmake -DBUILD_TESTS=ON ..
+  - cmake --build . --target all
+script:
+  - ctest --verbose
 notifications:
   email:
     on_success: never
     on_failure: always
-script:
-  - ./PathDataProviderTest
