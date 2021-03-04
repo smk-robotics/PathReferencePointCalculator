@@ -14,13 +14,10 @@ std::vector<CarState> TextCarStateDataProvider::getCarStateDataFromFile(const st
     std::cerr << "[TextPathDataProvider] - Can't open " << fileName << " file!" << std::endl;
     return {};
   }
-  float x = 0.0f;
-  float y = 0.0f;
-  float yaw = 0.0f; 
-  float velocity = 0.0f;
+  CarState currentCarState;
   std::vector<CarState> carStates;
-  while (pathFile >> x >> y >> yaw >> velocity) {
-    carStates.push_back(CarState(x, y, yaw, velocity));
+  while (pathFile >> currentCarState.x >> currentCarState.y >> currentCarState.yaw >> currentCarState.speed) {
+    carStates.push_back(currentCarState);
   }
   pathFile.close();
   return carStates;

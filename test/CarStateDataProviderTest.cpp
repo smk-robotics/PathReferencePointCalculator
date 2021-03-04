@@ -1,11 +1,28 @@
 #include <gtest/gtest.h>
 #include "TextCarStateDataProvider.h"
 
-using namespace path_reference_point_calculator::car_state_data_provider;
+using namespace path_reference_point_calculator;
+using namespace car_state_data_provider;
 
 TEST(CarStateDataProviderTest, ConstructorTest) {
     TextCarStateDataProvider textCarStateDataProvider;
     ASSERT_NO_THROW(AbstractCarStateDataProvider &dataProvider = textCarStateDataProvider);
+}
+
+TEST(CarStateDataProviderTest, CarStateDefaultParamsTest) {
+    CarState carState;
+    EXPECT_FLOAT_EQ(carState.x, 0.0f);
+    EXPECT_FLOAT_EQ(carState.y, 0.0f);
+    EXPECT_FLOAT_EQ(carState.yaw, 0.0f);
+    EXPECT_FLOAT_EQ(carState.speed, 0.0f);
+}
+
+TEST(CarStateDataProviderTest, CarStateConstructorTest) {
+    CarState carState(1.0f, 2.0f, 3.0f, 4.0f);
+    EXPECT_FLOAT_EQ(carState.x, 1.0f);
+    EXPECT_FLOAT_EQ(carState.y, 2.0f);
+    EXPECT_FLOAT_EQ(carState.yaw, 3.0f);
+    EXPECT_FLOAT_EQ(carState.speed, 4.0f);
 }
 
 TEST(CarStateDataProviderTest, BasicTurnCarStateDataFromFileTest) {
