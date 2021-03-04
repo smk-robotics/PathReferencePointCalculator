@@ -5,8 +5,8 @@ using namespace path_reference_point_calculator;
 using namespace path_data_provider;
 
 TEST(PathDataProvidertest, ConstructorTest) {
-    TextPathDataProvider TextPathDataProvider;
-    ASSERT_NO_THROW(AbstractPathDataProvider &dataProvider = TextPathDataProvider);
+    TextPathDataProvider textPathDataProvider;
+    ASSERT_NO_THROW(AbstractPathDataProvider &dataProvider = textPathDataProvider);
 }
 
 TEST(CarStateDataProviderTest, PathPointDefaultParamsTest) {
@@ -25,8 +25,8 @@ TEST(PathDataProvidertest, BasicTurnPathFromFileTest) {
     std::string testFilePath = __FILE__;
     testFilePath = testFilePath.substr(0, testFilePath.rfind("test"));
     testFilePath += "test-data/BasicTurn/Path";
-    TextPathDataProvider TextPathDataProvider;
-    AbstractPathDataProvider &dataProvider = TextPathDataProvider;
+    TextPathDataProvider textPathDataProvider;
+    AbstractPathDataProvider &dataProvider = textPathDataProvider;
     ASSERT_NO_THROW(dataProvider.getPathFromFile(testFilePath));
     auto path = dataProvider.getPathFromFile(testFilePath);
     EXPECT_EQ(path.size(), 10);
@@ -40,8 +40,8 @@ TEST(PathDataProvidertest, EightCurvePathFromFileTest) {
     std::string testFilePath = __FILE__;
     testFilePath = testFilePath.substr(0, testFilePath.rfind("test"));
     testFilePath += "test-data/EightCurve/Path";
-    TextPathDataProvider TextPathDataProvider;
-    AbstractPathDataProvider &dataProvider = TextPathDataProvider;
+    TextPathDataProvider textPathDataProvider;
+    AbstractPathDataProvider &dataProvider = textPathDataProvider;
     ASSERT_NO_THROW(dataProvider.getPathFromFile(testFilePath));
     auto path = dataProvider.getPathFromFile(testFilePath);
     EXPECT_EQ(path.size(), 81);

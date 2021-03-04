@@ -26,5 +26,17 @@ target_link_libraries(CarStateDataProviderTest
     ${GTEST_LIBRARIES}
 )
 
+add_executable(NearestPathPointFinderTest
+    NearestPathPointFinderTest.cpp
+)
+
+target_link_libraries(NearestPathPointFinderTest
+    PathDataProvider
+    NearestPathPointFinder
+    ${GTEST_LIBRARIES}
+)
+
+
 add_test(NAME PathDataProviderTest COMMAND PathDataProviderTest)
-add_test(NAME CarStateDataProviderTest COMMAND CarStateDataProviderTest)
+add_test(NAME CarStateDataProviderTest COMMAND CarStateDataProviderTest)  
+add_test(NAME NearestPathPointFinderTest COMMAND NearestPathPointFinderTest)    
