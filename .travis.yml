@@ -8,7 +8,8 @@ install:
   - cmake -DBUILD_TESTS=ON ..
   - cmake --build . --target all
 script:
-  - ctest --verbose
+  - export GTEST_COLOR=1
+  - ctest --output-on-failure
 notifications:
   email:
     on_success: never

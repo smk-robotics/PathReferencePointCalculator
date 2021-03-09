@@ -27,7 +27,9 @@ target_link_libraries(CarStateDataProviderTest
 )
 
 add_executable(NearestPathPointFinderTest
-    NearestPathPointFinderTest.cpp
+    NearestPointFinderTest.cpp
+    NearestPointFinderTurnTest.cpp
+    NearestPointFinderEightTest.cpp
 )
 
 target_link_libraries(NearestPathPointFinderTest
@@ -36,7 +38,23 @@ target_link_libraries(NearestPathPointFinderTest
     ${GTEST_LIBRARIES}
 )
 
+gtest_discover_tests(PathDataProviderTest)
+gtest_discover_tests(CarStateDataProviderTest)
+gtest_discover_tests(NearestPathPointFinderTest) 
+#####################
+### VISUALIZATION ###
+#####################
+if (BUILD_VISUALIZATION)
+find_package(OpenCV REQUIRED)
 
-add_test(NAME PathDataProviderTest COMMAND PathDataProviderTest)
-add_test(NAME CarStateDataProviderTest COMMAND CarStateDataProviderTest)  
-add_test(NAME NearestPathPointFinderTest COMMAND NearestPathPointFinderTest)    
+add_executable(TurnPathVisualization
+    TurnPathVisualization.cpp
+)
+
+target_link_libraries(TurnPathVisualization
+    PathDataProvider
+    CarStateDataProvider
+    NearestPathPointFinder
+    ${OpenCV_LIBRARIES}
+)
+endif()
