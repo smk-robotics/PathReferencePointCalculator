@@ -6,12 +6,12 @@
 #include <iostream>
 #include "TextPathDataProvider.h"
 #include "TextCarStateDataProvider.h"
-#include "SimpleNearestPathPointFinder.h"
+#include "GuidingPathPointFinder.h"
 
 using namespace path_reference_point_calculator;
 using namespace path_data_provider;
 using namespace car_state_data_provider;
-using namespace nearest_path_point_finder;
+using namespace path_point_finder;
 
 std::string getPathToFile(const std::string pathName) {
     std::string testFilePath = __FILE__;
@@ -36,8 +36,8 @@ void drawPath(const std::vector<PathPoint> &path, const std::string windowName, 
 
 void drawCarState(const std::vector<PathPoint> &path, const std::vector<CarState> &carStates, 
                   const std::string windowName, const cv::Mat &img) {
-    SimpleNearestPathPointFinder simpleNearestPathPointFinder;
-    NearestPathPointFinderInterface &nearestPathPointFinder = simpleNearestPathPointFinder;
+    GuidingPathPointFinder guidingPathPointFinder;
+    PathPointFinderInterface &pathPointFinder = guidingPathPointFinder;
     for (auto i = 0; i < carStates.size(); i++) {
         if (i == 0) {
             continue;
@@ -47,15 +47,22 @@ void drawCarState(const std::vector<PathPoint> &path, const std::vector<CarState
         cv::circle(img, pt1, 2, cv::Scalar( 255, 0, 255 ), cv::FILLED, cv::LINE_8 );
         cv::circle(img, pt2, 2, cv::Scalar( 255, 0, 255 ), cv::FILLED, cv::LINE_8 );
         cv::line(img, pt1, pt2, cv::Scalar( 255, 0, 255 ), 2, cv::LINE_8);
-        auto pointIndex = simpleNearestPathPointFinder.nearestPathPointIndex(carStates.at(i), path);
+        auto pointIndex = guidingPathPointFinder.pathPointIndex(carStates.at(i), path);
         cv::Point pt3(path.at(pointIndex).x * 75, 500 - path.at(pointIndex).y * 75);
         cv::circle(img, pt3, 4, cv::Scalar( 0, 0, 255 ), cv::FILLED, cv::LINE_8 );
         cv::imshow(windowName, img);
-        cv::waitKey(100);
+        auto k = cv::waitKey(100);
+        if (k == 27) {
+            break;
+        }
     }
 }
 
 int main(int argc, char *argv[]) {
+    if (argc == 1) {
+        std::cerr << "[ERROR] - Need to pass path name as argument!"<< std::endl;
+        return 0;
+    }
     cv::Mat img = cv::Mat::zeros(500, 500, CV_8UC3 );
     cv::imshow("TurnPathVisualization", img);
     std::string pathFile = getPathToFile(argv[1]) + "/Path";

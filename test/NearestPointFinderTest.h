@@ -1,12 +1,12 @@
 #include <string>
 #include <gtest/gtest.h>
 #include "TextPathDataProvider.h"
-#include "SimpleNearestPathPointFinder.h"
+#include "GuidingPathPointFinder.h"
 
 #pragma once
 
 using namespace path_reference_point_calculator;
-using namespace nearest_path_point_finder;
+using namespace path_point_finder;
 using namespace path_data_provider;
 
 class NearestPointFinderTest : public ::testing::Test {

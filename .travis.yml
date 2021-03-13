@@ -5,7 +5,7 @@ language: cpp
 install:
   - cd third-party && ./build_third_party.sh && cd -
   - mkdir -p build && cd build
-  - cmake -DBUILD_TESTS=ON ..
+  - cmake -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=Release ..
   - cmake --build . --target all
 script:
   - export GTEST_COLOR=1

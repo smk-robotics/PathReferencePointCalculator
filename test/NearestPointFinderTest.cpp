@@ -1,24 +1,24 @@
 #include "NearestPointFinderTest.h"
 
 TEST_F(NearestPointFinderTest, ConstructorTest) {
-    SimpleNearestPathPointFinder simpleNearestPathPointFinder;
-    ASSERT_NO_THROW(NearestPathPointFinderInterface &nearestPathPointFinder = simpleNearestPathPointFinder);
+    GuidingPathPointFinder guidingPathPointFinder;
+    ASSERT_NO_THROW(PathPointFinderInterface &pathPointFinder = guidingPathPointFinder);
 }
 
 TEST_F(NearestPointFinderTest, BasicTurnPathTest) {
-    ASSERT_EQ(mBasicTurnPath.size(), 10);
+    ASSERT_EQ(mBasicTurnPath.size(), 11);
     ASSERT_FLOAT_EQ(mBasicTurnPath.front().x, 0.0f);
     ASSERT_FLOAT_EQ(mBasicTurnPath.front().y, 0.0f);
-    ASSERT_FLOAT_EQ(mBasicTurnPath.back().x, 5.6775174f);
-    ASSERT_FLOAT_EQ(mBasicTurnPath.back().y, 5.6774964f);
+    ASSERT_FLOAT_EQ(mBasicTurnPath.back().x, 6.6474967f);
+    ASSERT_FLOAT_EQ(mBasicTurnPath.back().y, 5.6775174f);
 }
 
 TEST_F(NearestPointFinderTest, EightCurvePathTest) {
-    ASSERT_EQ(mEightCurvePath.size(), 81);
+    ASSERT_EQ(mEightCurvePath.size(), 83);
     ASSERT_FLOAT_EQ(mEightCurvePath.front().x, 0.0f);
     ASSERT_FLOAT_EQ(mEightCurvePath.front().y, 0.0f);
-    ASSERT_FLOAT_EQ(mEightCurvePath.back().x, 0.00028545715f);
-    ASSERT_FLOAT_EQ(mEightCurvePath.back().y, 0.11905058f);
+    ASSERT_FLOAT_EQ(mEightCurvePath.back().x, -0.83159143f);
+    ASSERT_FLOAT_EQ(mEightCurvePath.back().y, 0.02987529f);
 }
 
 int main(int argc, char *argv[]) {

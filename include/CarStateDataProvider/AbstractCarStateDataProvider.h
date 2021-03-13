@@ -34,13 +34,13 @@ protected:
      * @details Check that given filename is valid.
      * @return True if name valid, false if not.
      */
-    bool fileNameValid(const std::string &fileName) const;
+    [[nodiscard]] bool fileNameValid(const std::string &fileName) const;
     /**
      * @brief fileExists function.
      * @details Check that given file exists in hosts filesystem.
      * @return True if file exists, false if not.
      */
-    bool fileExists(const std::string &fileName) const;
+    [[nodiscard]] bool fileExists(const std::string &fileName) const;
 };
 
 } // namespace path_reference_point_calculator::car_state_data_provider

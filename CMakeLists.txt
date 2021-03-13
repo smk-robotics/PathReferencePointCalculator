@@ -51,7 +51,7 @@ target_include_directories(CarStateDataProvider PUBLIC
     include/CarStateDataProvider
 )
 #############################################
-### NEAREST_PATH_POINT_CAKCULATOR_LIBRARY ###
+### PATH_POINT_FINDER_LIBRARY ###
 #############################################
 file(GLOB NEAREST_PATH_POINT_CAKCULATOR_SOURCES CONFIGURE_DEPENDS src/NearestPathPointFinder/*.cpp)
 
@@ -66,6 +66,23 @@ target_link_libraries(NearestPathPointFinder PUBLIC
 
 target_include_directories(NearestPathPointFinder PUBLIC
     include/NearestPathPointFinder
+)
+#########################################
+### CROSSING_POINT_CAKCULATOR_LIBRARY ###
+#########################################
+file(GLOB CROSSING_POINT_CALCULATOR_SOURCES CONFIGURE_DEPENDS src/CrossingPointCalculator/*.cpp)
+
+add_library(CrossingPointCalculator
+  ${CROSSING_POINT_CALCULATOR_SOURCES}
+)
+
+target_link_libraries(CrossingPointCalculator PUBLIC
+    CarState
+    PathPoint
+)
+
+target_include_directories(CrossingPointCalculator PUBLIC
+    include/CrossingPointCalculator
 )
 #############
 ### TESTS ###
