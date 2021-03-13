@@ -10,11 +10,12 @@ PathPoint PerpendicularLinesCrossingPointCalculator::crossingPoint(const CarStat
     return crossingPoint(pathSegmentLineCoeff, perpendicularLineCoeff);
 }
 
-std::pair<float, float> PerpendicularLinesCrossingPointCalculator::lineCoefficients(const PathPoint &linePoint1, 
-                                                                     const PathPoint &linePoint2) const noexcept {
+std::pair<float, float> PerpendicularLinesCrossingPointCalculator::lineCoefficients(const PathPoint &segmentStartPoint, 
+                                                             const PathPoint &segmentFinishPoint) const noexcept {
     std::pair<float, float> lineCoefficients;
-    lineCoefficients.first = (linePoint1.y - linePoint2.y) / (linePoint1.x - linePoint2.x);
-    lineCoefficients.second = linePoint1.y - lineCoefficients.first * linePoint1.x;
+    lineCoefficients.first = (segmentStartPoint.y - segmentFinishPoint.y) / 
+                                                                     (segmentStartPoint.x - segmentFinishPoint.x);
+    lineCoefficients.second = segmentStartPoint.y - lineCoefficients.first * segmentStartPoint.x;
     return lineCoefficients;
 }
 
@@ -26,11 +27,11 @@ std::pair<float, float> PerpendicularLinesCrossingPointCalculator::perpendicular
     return perpendicularLineCoefficients;
 }
 
-PathPoint PerpendicularLinesCrossingPointCalculator::crossingPoint(const std::pair<float, float> &lineCorfficients, 
-                                    const std::pair<float, float> &perpendicularLineCorfficients) const noexcept {
+PathPoint PerpendicularLinesCrossingPointCalculator::crossingPoint(const std::pair<float, float> &lineCorfficients1, 
+                                    const std::pair<float, float> &lineCorfficients2) const noexcept {
     PathPoint crossingPoint; 
-    crossingPoint.x = (lineCorfficients.second - perpendicularLineCorfficients.second) / 
-                                                   (lineCorfficients.first - perpendicularLineCorfficients.first);
-    crossingPoint.y = lineCorfficients.first * crossingPoint.x + lineCorfficients.second;                                                                 
+    crossingPoint.x = (lineCorfficients2.second - lineCorfficients1.second) / 
+                                                              (lineCorfficients1.first - lineCorfficients2.first);
+    crossingPoint.y = lineCorfficients1.first * crossingPoint.x + lineCorfficients1.second;                                                                 
     return crossingPoint;
 }
