@@ -67,6 +67,14 @@ target_link_libraries(PathPointFinder PUBLIC
 target_include_directories(PathPointFinder PUBLIC
     include/PathPointFinder
 )
+####################
+### LINE_LIBRARY ###
+####################
+add_library(Line INTERFACE)
+
+target_include_directories(Line INTERFACE 
+    include/Line
+)
 #########################################
 ### CROSSING_POINT_CAKCULATOR_LIBRARY ###
 #########################################
@@ -79,6 +87,7 @@ add_library(CrossingPointCalculator
 target_link_libraries(CrossingPointCalculator PUBLIC
     CarState
     PathPoint
+    Line
 )
 
 target_include_directories(CrossingPointCalculator PUBLIC

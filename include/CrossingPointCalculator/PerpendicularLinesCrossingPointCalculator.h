@@ -5,6 +5,7 @@
  * @copyright BSD-3-Clause License.
  */
 #include <utility>
+#include "Line.h"
 #include "CrossingPointCalculatorInterface.h"
 
 #pragma once
@@ -30,34 +31,33 @@ public:
      * @return PathPoint 
      */
     [[nodiscard]] PathPoint crossingPoint(const CarState &carState, const PathPoint &segmentStartPoint, 
-                                                              const PathPoint &segmentFinishPoint) const noexcept;
+                                                              const PathPoint &segmentFinishPoint) noexcept;
 protected:
     /**
      * @brief lineCoefficients function.
-     * @details Calculates k and b coefficients from line equation (y = k*x + b).
+     * @details Calculates equation coefficients for line that goes through given points.
      * @param[in] linePoint1 First point from desired line.
      * @param[in] linePoint2 Second point from desired line.
-     * @return std::pair<float, float> Line coefficients (first - k, second - b).
+     * @return Line Custom structure contains line equation coefficients.
      */
-    [[nodiscard]] std::pair<float, float> lineCoefficients(const PathPoint &linePoint1, 
-                                                                      const PathPoint &linePoint2) const noexcept;
+    [[nodiscard]] Line lineCoefficients(const PathPoint &linePoint1, const PathPoint &linePoint2) noexcept;
     /**
      * @brief perpendicularLineCoefficients function.
-     * @details Calculates k and b coefficients of perpendicular line for linear path segment.
-     * @param[in] lineCoefficients Linear segment equation coefficients (k - first, b - second).
+     * @details Calculates equation coefficients of perpendicular line for linear path segment.
+     * @param[in] Line Custom line structure contains line equation coefficients.
      * @param[in] carState Car state for which the perpendicular line will be calculated.
-     * @return std::pair<float, float> Perpendicular line coefficients for given line (first - k, second - b).
+     * @return Line Custom structure contains line equation coefficients.
      */
-    [[nodiscard]] std::pair<float, float> perpendicularLineCoefficients(const std::pair<float, float> &lineCoefficients, 
-                                                                         const CarState &carState) const noexcept;
+    [[nodiscard]] Line perpendicularLineCoefficients(const Line &line, const CarState &carState) const noexcept;
     /**
      * @brief crossingPoint function.
-     * @param[in] lineCorfficients1 First line equation coefficients.
-     * @param[in] lineCorfficients2 Second line equation coefficients.
+     * @param[in] Line1 Custom line structure contains equation coefficients for first line.
+     * @param[in] Line2 Custom line structure contains equation coefficients for second line.
      * @return PathPoint Crossing point between two lines.
      */
-    [[nodiscard]] PathPoint crossingPoint(const std::pair<float, float> &lineCorfficients1, 
-                                                 const std::pair<float, float> &lineCorfficients2) const noexcept;
+    [[nodiscard]] PathPoint crossingPoint(const Line &Line1, const Line &Line2) const noexcept;
+
+    void normalizeAngle(float &angle);
 };
 
 } // path_reference_point_calculator::crossing_point_calculator

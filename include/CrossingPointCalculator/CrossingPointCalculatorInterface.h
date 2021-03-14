@@ -24,7 +24,7 @@ public:
      * @return PathPoint Calculated crossing point for given car state and path segment.
      */
     virtual PathPoint crossingPoint(const CarState &carState, const PathPoint &segmentStartPoint, 
-                                    const PathPoint &segmentFinishPoint) const noexcept = 0;
+                                    const PathPoint &segmentFinishPoint) noexcept = 0;
     /**
      * @brief Virtual class destructor.
      */
