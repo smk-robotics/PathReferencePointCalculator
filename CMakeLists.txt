@@ -100,3 +100,21 @@ if (BUILD_TESTS)
     enable_testing()
     add_subdirectory(test)
 endif()
+#####################
+### VISUALIZATION ###
+#####################
+if (BUILD_VISUALIZATION)
+find_package(OpenCV REQUIRED)
+
+add_executable(Visualization
+    test/Visualization.cpp
+)
+
+target_link_libraries(Visualization
+    PathDataProvider
+    CarStateDataProvider
+    PathPointFinder
+    CrossingPointCalculator
+    ${OpenCV_LIBRARIES}
+)
+endif()
