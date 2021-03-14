@@ -31,7 +31,7 @@ public:
      */
     [[nodiscard]] PathPoint crossingPoint(const CarState &carState, const PathPoint &segmentStartPoint, 
                                                               const PathPoint &segmentFinishPoint) const noexcept;
-private:
+protected:
     /**
      * @brief lineCoefficients function.
      * @details Calculates k and b coefficients from line equation (y = k*x + b).

@@ -26,21 +26,29 @@ target_link_libraries(CarStateDataProviderTest
     ${GTEST_LIBRARIES}
 )
 
-add_executable(NearestPathPointFinderTest
-    NearestPointFinderTest.cpp
-    NearestPointFinderTurnTest.cpp
-    NearestPointFinderEightTest.cpp
+add_executable(PathPointFinderTest
+    PathPointFinderTest.cpp
+    PathPointFinderTurnTest.cpp
+    PathPointFinderEightTest.cpp
 )
 
-target_link_libraries(NearestPathPointFinderTest
+target_link_libraries(PathPointFinderTest
     PathDataProvider
-    NearestPathPointFinder
+    PathPointFinder
+    ${GTEST_LIBRARIES}
+)
+
+add_executable(CrossingPointCalculatorTest
+    CrossingPointCalculatorTest.cpp
+)
+
+target_link_libraries(CrossingPointCalculatorTest
     ${GTEST_LIBRARIES}
 )
 
 gtest_discover_tests(PathDataProviderTest)
 gtest_discover_tests(CarStateDataProviderTest)
-gtest_discover_tests(NearestPathPointFinderTest) 
+gtest_discover_tests(PathPointFinderTest) 
 #####################
 ### VISUALIZATION ###
 #####################
@@ -54,7 +62,7 @@ add_executable(TurnPathVisualization
 target_link_libraries(TurnPathVisualization
     PathDataProvider
     CarStateDataProvider
-    NearestPathPointFinder
+    PathPointFinder
     ${OpenCV_LIBRARIES}
 )
 endif()

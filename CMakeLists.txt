@@ -53,19 +53,19 @@ target_include_directories(CarStateDataProvider PUBLIC
 #############################################
 ### PATH_POINT_FINDER_LIBRARY ###
 #############################################
-file(GLOB NEAREST_PATH_POINT_CAKCULATOR_SOURCES CONFIGURE_DEPENDS src/NearestPathPointFinder/*.cpp)
+file(GLOB PATH_POINT_FINDER_SOURCES CONFIGURE_DEPENDS src/PathPointFinder/*.cpp)
 
-add_library(NearestPathPointFinder
-  ${NEAREST_PATH_POINT_CAKCULATOR_SOURCES}
+add_library(PathPointFinder
+  ${PATH_POINT_FINDER_SOURCES}
 )
 
-target_link_libraries(NearestPathPointFinder PUBLIC
+target_link_libraries(PathPointFinder PUBLIC
     CarState
     PathPoint
 )
 
-target_include_directories(NearestPathPointFinder PUBLIC
-    include/NearestPathPointFinder
+target_include_directories(PathPointFinder PUBLIC
+    include/PathPointFinder
 )
 #########################################
 ### CROSSING_POINT_CAKCULATOR_LIBRARY ###
