@@ -23,7 +23,7 @@ public:
      * @details Parse txt file with path data to vector with points.
      * @return Vector with path points (std::pair<x_coord, y_coord>).
      */
-    std::vector<std::pair<float, float>> getPathFromFile(const std::string &fileName) const noexcept override;
+    [[nodiscard]] std::vector<PathPoint> getPathFromFile(const std::string &fileName) const noexcept override;
 };
 
 } // namespace path_reference_point_calculator::path_data_provider

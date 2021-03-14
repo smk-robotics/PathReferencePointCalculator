@@ -25,7 +25,7 @@ public:
      * @details Parse txt file with car state data to vector with states.
      * @return Vector with cas states.
      */
-    std::vector<CarState> getCarStateDataFromFile(const std::string &fileName) const noexcept override;
+    [[nodiscard]] std::vector<CarState> getCarStateDataFromFile(const std::string &fileName) const noexcept override;
 };
 
 } // namespace path_reference_point_calculator::car_state_data_provider

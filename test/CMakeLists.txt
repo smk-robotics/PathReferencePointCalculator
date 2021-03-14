@@ -26,5 +26,46 @@ target_link_libraries(CarStateDataProviderTest
     ${GTEST_LIBRARIES}
 )
 
-add_test(NAME PathDataProviderTest COMMAND PathDataProviderTest)
-add_test(NAME CarStateDataProviderTest COMMAND CarStateDataProviderTest)
+add_executable(PathPointFinderTest
+    PathPointFinderTest.cpp
+    PathPointFinderTurnTest.cpp
+    PathPointFinderEightTest.cpp
+)
+
+target_link_libraries(PathPointFinderTest
+    PathDataProvider
+    PathPointFinder
+    ${GTEST_LIBRARIES}
+)
+
+add_executable(CrossingPointCalculatorTest
+    CrossingPointCalculatorTest.cpp
+)
+
+target_link_libraries(CrossingPointCalculatorTest
+    CrossingPointCalculator
+    ${GTEST_LIBRARIES}
+)
+
+gtest_discover_tests(PathDataProviderTest)
+gtest_discover_tests(CarStateDataProviderTest)
+gtest_discover_tests(PathPointFinderTest) 
+gtest_discover_tests(CrossingPointCalculatorTest) 
+#####################
+### VISUALIZATION ###
+#####################
+if (BUILD_VISUALIZATION)
+find_package(OpenCV REQUIRED)
+
+add_executable(Visualization
+    Visualization.cpp
+)
+
+target_link_libraries(Visualization
+    PathDataProvider
+    CarStateDataProvider
+    PathPointFinder
+    CrossingPointCalculator
+    ${OpenCV_LIBRARIES}
+)
+endif()

@@ -11,10 +11,15 @@ namespace path_reference_point_calculator {
  * @details Custom car state structure contains x,y coordinates, yaw angle and speed.
  */
 struct CarState {
-    float x;     /**< Car x coordinate [meters].*/
-    float y;     /**< Car y coordinate [meters]. */
-    float yaw;   /**< Car heading angle [radians].*/
-    float speed; /**< Car linear speed [m/s]. */
+    float x = 0.0f;     /**< Car x coordinate [meters].*/
+    float y = 0.0f;     /**< Car y coordinate [meters]. */
+    float yaw = 0.0f;   /**< Car heading angle [radians].*/
+    float speed = 0.0f; /**< Car linear speed [m/s]. */
+    /**
+     * @brief Construct a new Car State struct.
+     * @details Default constructor for new Car State struct.
+     */
+    CarState() = default;
     /**
      * @brief Constructor for new Car State struct.
      * @param[in] carX Current car x coordinate [meters].

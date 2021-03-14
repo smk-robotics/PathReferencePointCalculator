@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include <utility>
+#include "PathPoint.h"
 
 #pragma once
 namespace path_reference_point_calculator::path_data_provider {
@@ -21,7 +22,7 @@ public:
   * @details Parse any file with path data to vector with points.
   * @return Vector with path points (std::pair<x_coord, y_coord>).
    */
-  virtual std::vector<std::pair<float, float>> getPathFromFile(const std::string &pathFileName) const = 0;
+  virtual std::vector<PathPoint> getPathFromFile(const std::string &pathFileName) const = 0;
   /**
    * @brief Virtual class destructor.
    */

@@ -1,11 +1,28 @@
 #include <gtest/gtest.h>
 #include "TextCarStateDataProvider.h"
 
-using namespace path_reference_point_calculator::car_state_data_provider;
+using namespace path_reference_point_calculator;
+using namespace car_state_data_provider;
 
 TEST(CarStateDataProviderTest, ConstructorTest) {
     TextCarStateDataProvider textCarStateDataProvider;
     ASSERT_NO_THROW(AbstractCarStateDataProvider &dataProvider = textCarStateDataProvider);
+}
+
+TEST(CarStateDataProviderTest, CarStateDefaultParamsTest) {
+    CarState carState;
+    EXPECT_FLOAT_EQ(carState.x, 0.0f);
+    EXPECT_FLOAT_EQ(carState.y, 0.0f);
+    EXPECT_FLOAT_EQ(carState.yaw, 0.0f);
+    EXPECT_FLOAT_EQ(carState.speed, 0.0f);
+}
+
+TEST(CarStateDataProviderTest, CarStateConstructorTest) {
+    CarState carState(1.0f, 2.0f, 3.0f, 4.0f);
+    EXPECT_FLOAT_EQ(carState.x, 1.0f);
+    EXPECT_FLOAT_EQ(carState.y, 2.0f);
+    EXPECT_FLOAT_EQ(carState.yaw, 3.0f);
+    EXPECT_FLOAT_EQ(carState.speed, 4.0f);
 }
 
 TEST(CarStateDataProviderTest, BasicTurnCarStateDataFromFileTest) {
@@ -19,11 +36,11 @@ TEST(CarStateDataProviderTest, BasicTurnCarStateDataFromFileTest) {
     EXPECT_EQ(carState.size(), 91);
     EXPECT_FLOAT_EQ(carState.front().x, 0.0f);
     EXPECT_FLOAT_EQ(carState.front().y, 0.0f);
-    EXPECT_FLOAT_EQ(carState.front().yaw, 0.0f);
+    EXPECT_FLOAT_EQ(carState.front().yaw, 1.5707999f);
     EXPECT_FLOAT_EQ(carState.front().speed, 0.0f);
-    EXPECT_FLOAT_EQ(carState.back().x, 5.7794337f);
-    EXPECT_FLOAT_EQ(carState.back().y, 5.67943f);
-    EXPECT_FLOAT_EQ(carState.back().yaw, 1.570797f);
+    EXPECT_FLOAT_EQ(carState.back().x, 5.7794132f);
+    EXPECT_FLOAT_EQ(carState.back().y, 5.6794515f);
+    EXPECT_FLOAT_EQ(carState.back().yaw, 3.0000001e-06f);
     EXPECT_FLOAT_EQ(carState.back().speed, 0.1f);
 }
 
@@ -35,14 +52,14 @@ TEST(CarStateDataProviderTest, EightCurveCarStateDataFromFileTest) {
     AbstractCarStateDataProvider &dataProvider = textCarStateDataProvider;
     ASSERT_NO_THROW(dataProvider.getCarStateDataFromFile(testFilePath));
     auto carState = dataProvider.getCarStateDataFromFile(testFilePath);
-    EXPECT_EQ(carState.size(), 720);
+    EXPECT_EQ(carState.size(), 721);
     EXPECT_FLOAT_EQ(carState.front().x, 0.0f);
     EXPECT_FLOAT_EQ(carState.front().y, 0.0f);
-    EXPECT_FLOAT_EQ(carState.front().yaw, 4.7123899f);
+    EXPECT_FLOAT_EQ(carState.front().yaw, 3.1415901f);
     EXPECT_FLOAT_EQ(carState.front().speed, 0.0f);
-    EXPECT_FLOAT_EQ(carState.back().x, 0.099969141f);
-    EXPECT_FLOAT_EQ(carState.back().y, -1.0188852e-07f);
-    EXPECT_FLOAT_EQ(carState.back().yaw, 4.7298431f);
+    EXPECT_FLOAT_EQ(carState.back().x, -3.0856652e-05f);
+    EXPECT_FLOAT_EQ(carState.back().y, 1.2342759e-10f);
+    EXPECT_FLOAT_EQ(carState.back().yaw, 3.1415901f);
     EXPECT_FLOAT_EQ(carState.back().speed, 0.1f);
 }
 
