@@ -5,7 +5,7 @@ Path reference point calculator library. Calculates reference point on path for 
 
 # Build
 
-### If you want to just build libraries run: 
+If you want to just build libraries run: 
 ```
 mkdir -p build && cd build
 cmake .. && make -j6
@@ -26,7 +26,7 @@ GTEST_COLOR=1 ctest --output-on-failure
 
 # Visualization:
 
-### If you want to build tests and visualization run:
+If you want to build and run visualization:
 ```
 mkdir -p build && cd build
 cmake -DBUILD_VISUALIZATION=ON .. && make -j6
