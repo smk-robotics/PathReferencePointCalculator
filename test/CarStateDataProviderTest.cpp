@@ -25,10 +25,10 @@ TEST(CarStateDataProviderTest, CarStateConstructorTest) {
     EXPECT_FLOAT_EQ(carState.speed, 4.0f);
 }
 
-TEST(CarStateDataProviderTest, BasicTurnCarStateDataFromFileTest) {
+TEST(CarStateDataProviderTest, TurnCarStateDataFromFileTest) {
     std::string testFilePath = __FILE__;
     testFilePath = testFilePath.substr(0, testFilePath.rfind("test"));
-    testFilePath += "test-data/BasicTurn/CarStateData";
+    testFilePath += "test-data/Turn/CarStateData";
     TextCarStateDataProvider textCarStateDataProvider;
     AbstractCarStateDataProvider &dataProvider = textCarStateDataProvider;
     ASSERT_NO_THROW(dataProvider.getCarStateDataFromFile(testFilePath));

@@ -21,10 +21,10 @@ TEST(CarStateDataProviderTest, PathPointConstructorTest) {
     EXPECT_FLOAT_EQ(pathPoint.y, 2.0f);
 }
 
-TEST(PathDataProvidertest, BasicTurnPathFromFileTest) {
+TEST(PathDataProvidertest, TurnPathFromFileTest) {
     std::string testFilePath = __FILE__;
     testFilePath = testFilePath.substr(0, testFilePath.rfind("test"));
-    testFilePath += "test-data/BasicTurn/Path";
+    testFilePath += "test-data/Turn/Path";
     TextPathDataProvider textPathDataProvider;
     AbstractPathDataProvider &dataProvider = textPathDataProvider;
     ASSERT_NO_THROW(dataProvider.getPathFromFile(testFilePath));

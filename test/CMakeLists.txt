@@ -50,22 +50,4 @@ target_link_libraries(CrossingPointCalculatorTest
 gtest_discover_tests(PathDataProviderTest)
 gtest_discover_tests(CarStateDataProviderTest)
 gtest_discover_tests(PathPointFinderTest) 
-gtest_discover_tests(CrossingPointCalculatorTest) 
-#####################
-### VISUALIZATION ###
-#####################
-if (BUILD_VISUALIZATION)
-find_package(OpenCV REQUIRED)
-
-add_executable(Visualization
-    Visualization.cpp
-)
-
-target_link_libraries(Visualization
-    PathDataProvider
-    CarStateDataProvider
-    PathPointFinder
-    CrossingPointCalculator
-    ${OpenCV_LIBRARIES}
-)
-endif()
+gtest_discover_tests(CrossingPointCalculatorTest)

@@ -16,7 +16,7 @@ public:
         AbstractPathDataProvider &dataProvider = textPathDataProvider;
         std::string testPathFile = __FILE__;
         testPathFile = testPathFile.substr(0, testPathFile.rfind("test"));
-        testPathFile += "test-data/BasicTurn/Path";
+        testPathFile += "test-data/Turn/Path";
         mBasicTurnPath = dataProvider.getPathFromFile(testPathFile);
         testPathFile = testPathFile.substr(0, testPathFile.rfind("test"));
         testPathFile += "test-data/EightCurve/Path";
