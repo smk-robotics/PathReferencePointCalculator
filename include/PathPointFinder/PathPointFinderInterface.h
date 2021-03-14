@@ -18,10 +18,10 @@ namespace path_reference_point_calculator::path_point_finder {
 class PathPointFinderInterface {
 public:
     /**
-     * @brief nearestPathPointIndex functrion
+     * @brief pathPointIndex functrion
      * @param[in] state Current car state (x, y, yaw, speed).
      * @param[in] path Path points vector. 
-     * @return size_t Index of nearest path point from path points vector to given car state. 
+     * @return size_t Index of required (depends on method) path point from path points vector to given car state. 
      */
     virtual size_t pathPointIndex(const CarState &state, const std::vector<PathPoint> &path) const noexcept = 0;
     /**

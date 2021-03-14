@@ -50,9 +50,9 @@ target_link_libraries(CarStateDataProvider PUBLIC
 target_include_directories(CarStateDataProvider PUBLIC
     include/CarStateDataProvider
 )
-#############################################
+#################################
 ### PATH_POINT_FINDER_LIBRARY ###
-#############################################
+#################################
 file(GLOB PATH_POINT_FINDER_SOURCES CONFIGURE_DEPENDS src/PathPointFinder/*.cpp)
 
 add_library(PathPointFinder

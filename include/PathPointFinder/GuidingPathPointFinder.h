@@ -1,6 +1,6 @@
 /**
  * @file GuidingPathPointFinder.h
- * @brief Class with simple least squares algorithm that calculates nearest path point to given car state.
+ * @brief Class with algorithm that finds guiding path point to given car state.
  * @author Smirnov Kirill <smk-robotics@gmail.com>
  * @copyright BSD-3-Clause License.
  */
@@ -22,10 +22,10 @@ public:
     GuidingPathPointFinder() = default;
     /**
      * @brief pathPointIndex functrion
-     * @details Find nearest path point in front of the car.
+     * @details Find guiding point in path for given car state.
      * @param[in] state Current car state (x, y, yaw, speed).
      * @param[in] path Path points vector. 
-     * @return size_t Index of nearest path point from path points vector to given car state. 
+     * @return size_t Index of guiding point from path points vector. 
      */
     [[nodiscard]] size_t pathPointIndex(const CarState &state, const std::vector<PathPoint> &path) const noexcept 
                                                                                                          override;
