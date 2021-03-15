@@ -23,7 +23,7 @@ public:
      * @param[in] path Path points vector. 
      * @return size_t Index of required (depends on method) path point from path points vector to given car state. 
      */
-    virtual size_t pathPointIndex(const CarState &state, const std::vector<PathPoint> &path) const noexcept = 0;
+    virtual size_t pathPointIndex(const CarState &state, std::vector<PathPoint> &path) const noexcept = 0;
     /**
      * @brief Virtual class destructor.
      */

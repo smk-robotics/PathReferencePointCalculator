@@ -13,7 +13,7 @@ using namespace car_state_data_provider;
 using namespace path_point_finder;
 using namespace crossing_point_calculator;
 
-constexpr uint16_t WINDOW_SIZE = 800;
+constexpr uint16_t WINDOW_SIZE = 850;
 
 std::string getPathToFile(const std::string pathName) {
     std::string testFilePath = __FILE__;
@@ -72,7 +72,7 @@ void drawPath(const std::vector<PathPoint> &path, const std::string windowName, 
     }
 }
 
-void drawCarState(const std::vector<PathPoint> &path, const std::vector<CarState> &carStates, 
+void drawCarState(std::vector<PathPoint> &path, const std::vector<CarState> &carStates, 
                   const std::string windowName, const cv::Mat &img) {
     GuidingPathPointFinder guidingPathPointFinder;
     PathPointFinderInterface &pathPointFinder = guidingPathPointFinder;
@@ -94,7 +94,7 @@ void drawCarState(const std::vector<PathPoint> &path, const std::vector<CarState
                            img.rows / 2 - (referencePoint.y - centroid.second) * sFactor);
         cv::circle(img, refPoint, 3, cv::Scalar( 255, 255, 255 ), cv::FILLED, cv::LINE_8 );                                                                                      
         cv::imshow(windowName, img);
-        auto k = cv::waitKey(200);
+        auto k = cv::waitKey(50);
         if (k == 27) {
             break;
         }

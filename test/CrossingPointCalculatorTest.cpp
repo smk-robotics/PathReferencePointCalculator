@@ -89,8 +89,8 @@ TEST_F(CrossingPointCalculatorTest, PerpendicularLineCoefficientsCalculationTest
     CarState state(-9.0f, -1.0f, 0.0f, 0.0f);
     auto pLine = mCrossingPointCalculator.perpendicularLineCoefficients(originLine, state);
     EXPECT_EQ(pLine.vertical, false);
-    EXPECT_FLOAT_EQ(pLine.k, -0.333f);
-    EXPECT_FLOAT_EQ(pLine.b, -3.997f);
+    EXPECT_FLOAT_EQ(pLine.k, -3.0030029f);
+    EXPECT_FLOAT_EQ(pLine.b, -28.027025f);
 }
 
 TEST_F(CrossingPointCalculatorTest, PerpendicularLineCoefficientsCalculationTest5) {

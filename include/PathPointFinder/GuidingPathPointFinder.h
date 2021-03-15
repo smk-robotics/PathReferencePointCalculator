@@ -17,9 +17,14 @@ namespace path_reference_point_calculator::path_point_finder {
 class GuidingPathPointFinder : public PathPointFinderInterface {
 public:
     /**
-     * @brief GuidingPathPointFinder class constructor.
+     * @brief GuidingPathPointFinder class default constructor.
      */
-    GuidingPathPointFinder() = default;
+    GuidingPathPointFinder() : mMaxSearchAngle(1.5708f) {};
+    /**
+     * @brief GuidingPathPointFinder class default constructor.
+     * @param[in] angle Max searching angle for guiding point (in front of the car).
+     */
+    GuidingPathPointFinder(const float angle) : mMaxSearchAngle(angle) {};
     /**
      * @brief pathPointIndex functrion
      * @details Find guiding point in path for given car state.
@@ -27,8 +32,15 @@ public:
      * @param[in] path Path points vector. 
      * @return size_t Index of guiding point from path points vector. 
      */
-    [[nodiscard]] size_t pathPointIndex(const CarState &state, const std::vector<PathPoint> &path) const noexcept 
-                                                                                                         override;
+    [[nodiscard]] size_t pathPointIndex(const CarState &state, std::vector<PathPoint> &path) const noexcept override;
+    /**
+     * @brief markPassingPoints functrion.
+     * @param[in] path Given path (vector of path points).
+     * @param[in] pointIndex Path point index to which all points are will mark as passed.
+     */
+    void markPassingPoints(std::vector<PathPoint> &path, const size_t pointIndex) const noexcept;
+private:
+    float mMaxSearchAngle;
 };
 
 } // namespace path_reference_point_calculator::path_point_finder
