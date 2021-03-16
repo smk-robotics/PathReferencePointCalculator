@@ -1,7 +1,7 @@
 #include <opencv2/imgproc.hpp> 
 #include <opencv2/highgui.hpp>
-#include <limits>
 #include <tuple>
+#include <limits>
 #include <iostream>
 #include "TextPathDataProvider.h"
 #include "TextCarStateDataProvider.h"
@@ -90,17 +90,20 @@ int main(int argc, char *argv[]) {
         std::cerr << "[ERROR] - Need to pass path name as argument!"<< std::endl;
         return 0;
     }
+    /**< Getting path data. */
     std::string pathFile = getPathToFile(argv[1]) + "/Path";
     TextPathDataProvider textPathDataProvider;
     AbstractPathDataProvider &pathDataProvider = textPathDataProvider;
     auto path = pathDataProvider.getPathFromFile(pathFile);
-    cv::Mat img = cv::Mat::zeros(WINDOW_SIZE, WINDOW_SIZE, CV_8UC3);
-    cv::imshow("TurnPathVisualization", img);
-    drawPath(path, "TurnPathVisualization", img);
+    /**< Getting car state data. */
     std::string carStatePath = getPathToFile(argv[1]) + "/CarStateData";
     TextCarStateDataProvider textCarStateDataProvider;
     AbstractCarStateDataProvider &carStateDataProvider = textCarStateDataProvider;
     auto carStates = carStateDataProvider.getCarStateDataFromFile(carStatePath);
+    /**< Visualization. */
+    cv::Mat img = cv::Mat::zeros(WINDOW_SIZE, WINDOW_SIZE, CV_8UC3);
+    cv::imshow("TurnPathVisualization", img);
+    drawPath(path, "TurnPathVisualization", img);
     drawCarState(path, carStates, "TurnPathVisualization", img);
     cv::waitKey(1000);
     return 0;
