@@ -17,8 +17,8 @@ TEST_F(PathPointFinderTest, EightCurvePathTest) {
     ASSERT_EQ(mEightCurvePath.size(), 83);
     ASSERT_FLOAT_EQ(mEightCurvePath.front().x, 0.0f);
     ASSERT_FLOAT_EQ(mEightCurvePath.front().y, 0.0f);
-    ASSERT_FLOAT_EQ(mEightCurvePath.back().x, -0.83159143f);
-    ASSERT_FLOAT_EQ(mEightCurvePath.back().y, 0.02987529f);
+    ASSERT_FLOAT_EQ(mEightCurvePath.back().x, 0.0);
+    ASSERT_FLOAT_EQ(mEightCurvePath.back().y, 0.0f);
 }
 
 int main(int argc, char *argv[]) {

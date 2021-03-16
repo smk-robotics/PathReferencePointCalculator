@@ -18,7 +18,7 @@ TEST_F(PathPointFinderTest, FindNearestPointEightCurveTest3) {
     CarState carState(0.199969350504888f, 0.001744306893717f, -3.1066914f, 0.1f);
     GuidingPathPointFinder guidingPathPointFinder;
     PathPointFinderInterface &pathPointFinder = guidingPathPointFinder;
-    EXPECT_EQ(guidingPathPointFinder.pathPointIndex(carState, mEightCurvePath), 42);
+    EXPECT_EQ(guidingPathPointFinder.pathPointIndex(carState, mEightCurvePath), 41);
 }
 
 
