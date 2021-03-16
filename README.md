@@ -30,11 +30,11 @@ If you want to build and run visualization:
 ```
 mkdir -p build && cd build
 cmake -DBUILD_VISUALIZATION=ON .. && make -j6
-./test/Visualization ${TEST_PATH}
+./Visualization ${TEST_PATH}
 ``` 
 *${TEST_PATH}* - name of path from test-data folder (Turn, Circle, EightCurve).
 
-Visualization uses default opencv library (no need to install on Ubuntu 18.04).
+Visualization uses common opencv.
 
 # Maintainer
 
