@@ -69,14 +69,14 @@ void drawCarState(std::vector<PathPoint> &path, const std::vector<CarState> &car
     for (auto i = 1; i < carStates.size(); i++) {
         cv::Point carPosition(img.cols / 2 + (carStates.at(i).x - centroidX) * sFactor, 
                               img.rows / 2 - (carStates.at(i).y - centroidY) * sFactor);
-        cv::circle(img, carPosition, 4, cv::Scalar( 255, 0, 255 ), cv::FILLED, cv::LINE_8 );
+        cv::circle(img, carPosition, 2, cv::Scalar( 255, 0, 255 ), cv::FILLED, cv::LINE_8 );
         auto referencePoint = referencePointCalculator.pathReferencePoint(carStates.at(i));
         if (!referencePoint) {
             continue;
         }
         cv::Point refPoint(img.cols / 2 + (referencePoint.value().x - centroidX) * sFactor, 
                            img.rows / 2 - (referencePoint.value().y - centroidY) * sFactor);
-        cv::circle(img, refPoint, 4, cv::Scalar( 0, 255, 255 ), cv::FILLED, cv::LINE_8);                                                                                      
+        cv::circle(img, refPoint, 2, cv::Scalar( 0, 255, 255 ), cv::FILLED, cv::LINE_8);                                                                                      
         cv::imshow(windowName, img);
         auto k = cv::waitKey(50);
         if (k == 27) {
