@@ -5,14 +5,11 @@
 #include <iostream>
 #include "TextPathDataProvider.h"
 #include "TextCarStateDataProvider.h"
-#include "GuidingPathPointFinder.h"
-#include "PerpendicularLinesCrossingPointCalculator.h"
+#include "PathReferncePointCalculator.h"
 
 using namespace path_reference_point_calculator;
 using namespace path_data_provider;
 using namespace car_state_data_provider;
-using namespace path_point_finder;
-using namespace crossing_point_calculator;
 
 constexpr uint16_t WINDOW_SIZE = 850;
 
@@ -68,29 +65,23 @@ void drawCarState(std::vector<PathPoint> &path, const std::vector<CarState> &car
     float centroidY = 0.0f;
     float sFactor = 1.0f;
     std::tie(centroidX, centroidY, sFactor) = scaleParameters(path, img);
-    GuidingPathPointFinder guidingPathPointFinder;
-    PathPointFinderInterface &pathPointFinder = guidingPathPointFinder;
-    PerpendicularLinesCrossingPointCalculator pLinesCrossingPointCalculator;
-    CrossingPointCalculatorInterface &scrossingPointCalculator = pLinesCrossingPointCalculator;
+    PathReferncePointCalculator referencePointCalculator(path, 1.5709f);
     for (auto i = 1; i < carStates.size(); i++) {
         cv::Point carPosition(img.cols / 2 + (carStates.at(i).x - centroidX) * sFactor, 
                               img.rows / 2 - (carStates.at(i).y - centroidY) * sFactor);
-        cv::circle(img, carPosition, 3, cv::Scalar( 255, 0, 255 ), cv::FILLED, cv::LINE_8 );
-        auto pointIndex = guidingPathPointFinder.pathPointIndex(carStates.at(i), path);
-        if (pointIndex == 0) {
+        cv::circle(img, carPosition, 4, cv::Scalar( 255, 0, 255 ), cv::FILLED, cv::LINE_8 );
+        auto referencePoint = referencePointCalculator.pathReferencePoint(carStates.at(i));
+        if (!referencePoint) {
             continue;
         }
-        cv::Point guidingPoint(img.cols / 2 + (path.at(pointIndex).x - centroidX) * sFactor, 
-                               img.rows / 2 - (path.at(pointIndex).y - centroidY) * sFactor);
-        cv::circle(img, guidingPoint, 2, cv::Scalar( 255, 0, 0 ), cv::FILLED, cv::LINE_8);
-        auto referencePoint = scrossingPointCalculator.crossingPoint(carStates.at(i), path.at(pointIndex - 1),
-                                                                                      path.at(pointIndex));
-        cv::Point refPoint(img.cols / 2 + (referencePoint.x - centroidX) * sFactor, 
-                           img.rows / 2 - (referencePoint.y - centroidY) * sFactor);
-        cv::circle(img, refPoint, 3, cv::Scalar( 255, 255, 255 ), cv::FILLED, cv::LINE_8);                                                                                      
+        cv::Point refPoint(img.cols / 2 + (referencePoint.value().x - centroidX) * sFactor, 
+                           img.rows / 2 - (referencePoint.value().y - centroidY) * sFactor);
+        cv::circle(img, refPoint, 4, cv::Scalar( 0, 255, 255 ), cv::FILLED, cv::LINE_8);                                                                                      
         cv::imshow(windowName, img);
         auto k = cv::waitKey(50);
-        if (k == 27) break;
+        if (k == 27) {
+            break;
+        }
     }
 }
 
@@ -111,6 +102,6 @@ int main(int argc, char *argv[]) {
     AbstractCarStateDataProvider &carStateDataProvider = textCarStateDataProvider;
     auto carStates = carStateDataProvider.getCarStateDataFromFile(carStatePath);
     drawCarState(path, carStates, "TurnPathVisualization", img);
-    int k = cv::waitKey(0); // Wait for a keystroke in the window
+    cv::waitKey(1000);
     return 0;
 }

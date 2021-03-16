@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.10.0)
 project(PathReferencePointCalculator LANGUAGES CXX VERSION 1.0.0)
 set(CMAKE_CXX_STANDARD 17)
 
-##########################
-### PATH_POINT_LIBRARY ###
-##########################
+##################
+### PATH_POINT ###
+##################
 add_library(PathPoint INTERFACE)
 
 target_include_directories(PathPoint INTERFACE
@@ -26,17 +26,17 @@ target_link_libraries(PathDataProvider PUBLIC
 target_include_directories(PathDataProvider PUBLIC
     include/PathDataProvider
 )
-#########################
-### CAR_STATE_LIBRARY ###
-#########################
+#################
+### CAR_STATE ###
+#################
 add_library(CarState INTERFACE)
 
 target_include_directories(CarState INTERFACE
     include/CarState
 )
-#######################################
-### CAR_STATE_DATA_PROVIDER_LIBRARY ###
-#######################################
+###############################
+### CAR_STATE_DATA_PROVIDER ###
+###############################
 file(GLOB CAR_STATE_DATA_PROVIDER_SOURCES CONFIGURE_DEPENDS src/CarStateDataProvider/*.cpp)
 
 add_library(CarStateDataProvider
@@ -50,9 +50,9 @@ target_link_libraries(CarStateDataProvider PUBLIC
 target_include_directories(CarStateDataProvider PUBLIC
     include/CarStateDataProvider
 )
-#################################
-### PATH_POINT_FINDER_LIBRARY ###
-#################################
+#########################
+### PATH_POINT_FINDER ###
+#########################
 file(GLOB PATH_POINT_FINDER_SOURCES CONFIGURE_DEPENDS src/PathPointFinder/*.cpp)
 
 add_library(PathPointFinder
@@ -67,17 +67,17 @@ target_link_libraries(PathPointFinder PUBLIC
 target_include_directories(PathPointFinder PUBLIC
     include/PathPointFinder
 )
-####################
-### LINE_LIBRARY ###
-####################
+############
+### LINE ###
+############
 add_library(Line INTERFACE)
 
 target_include_directories(Line INTERFACE 
     include/Line
 )
-#########################################
-### CROSSING_POINT_CAKCULATOR_LIBRARY ###
-#########################################
+#################################
+### CROSSING_POINT_CALCULATOR ###
+#################################
 file(GLOB CROSSING_POINT_CALCULATOR_SOURCES CONFIGURE_DEPENDS src/CrossingPointCalculator/*.cpp)
 
 add_library(CrossingPointCalculator
@@ -92,6 +92,22 @@ target_link_libraries(CrossingPointCalculator PUBLIC
 
 target_include_directories(CrossingPointCalculator PUBLIC
     include/CrossingPointCalculator
+)
+
+#######################################
+### PATH_REFERENCE_POINT_CALCULATOR ###
+#######################################
+add_library(PathReferencePointCalculator
+  src/PathReferencePointCalculator/PathReferencePointCalculator.cpp
+)
+
+target_link_libraries(PathReferencePointCalculator PUBLIC
+    CrossingPointCalculator
+    PathPointFinder
+)
+
+target_include_directories(PathReferencePointCalculator PUBLIC
+    include/PathReferencePointCalculator
 )
 #############
 ### TESTS ###
@@ -113,8 +129,7 @@ add_executable(Visualization
 target_link_libraries(Visualization
     PathDataProvider
     CarStateDataProvider
-    PathPointFinder
-    CrossingPointCalculator
+    PathReferencePointCalculator
     ${OpenCV_LIBRARIES}
 )
 endif()
