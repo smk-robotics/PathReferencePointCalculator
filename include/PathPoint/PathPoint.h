@@ -11,8 +11,9 @@ namespace path_reference_point_calculator {
  * @details Custom path point structure contains point x,y coordinates.
  */
 struct PathPoint {
-    float x = 0.0f; /**< Path point x coordinate [meters].*/
-    float y = 0.0f; /**< Path point y coordinate [meters].*/
+    float x = 0.0f;      /**< Path point x coordinate [meters].*/
+    float y = 0.0f;      /**< Path point y coordinate [meters].*/
+    bool passed = false; /**< Indicator that point was already passed. */ 
     /**
      * @brief Construct a new Path Point struct.
      * @details Default constructor for new Path Point struct.
@@ -25,6 +26,14 @@ struct PathPoint {
      */
     PathPoint(const float pointX, const float pointY)
     : x(pointX), y(pointY) {};
+    /**
+     * @brief Constructor for new Path Point struct.
+     * @param[in] pointX Path point x coordinate.
+     * @param[in] pointY Path point y coordinate.
+     * @param[in] p Indicator that point was already passed.
+     */
+    PathPoint(const float pointX, const float pointY, const bool p)
+    : x(pointX), y(pointY), passed(p) {};
 };
 
 } // namespace path_reference_point_calculator

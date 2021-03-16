@@ -16,6 +16,7 @@ std::vector<PathPoint> TextPathDataProvider::getPathFromFile(const std::string &
     return {};
   }
   PathPoint currentPathPoint;
+  currentPathPoint.passed = false;
   std::vector<PathPoint> path;
   while (pathFile >> currentPathPoint.x >> currentPathPoint.y) {
     path.push_back(currentPathPoint);
