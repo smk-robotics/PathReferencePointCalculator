@@ -47,8 +47,8 @@ TEST(PathDataProvidertest, EightCurvePathFromFileTest) {
     EXPECT_EQ(path.size(), 83);
     EXPECT_FLOAT_EQ(path.front().x, 0.0f);
     EXPECT_FLOAT_EQ(path.front().y, 0.0f);
-    EXPECT_FLOAT_EQ(path.back().x, -0.83159143f);
-    EXPECT_FLOAT_EQ(path.back().y, 0.02987529f);
+    EXPECT_FLOAT_EQ(path.back().x, 0.0);
+    EXPECT_FLOAT_EQ(path.back().y, 0.0f);
 }
 
 int main(int argc, char *argv[]) {
