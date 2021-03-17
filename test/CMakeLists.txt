@@ -47,7 +47,18 @@ target_link_libraries(CrossingPointCalculatorTest
     ${GTEST_LIBRARIES}
 )
 
+add_executable(PathReferencePointCalculatorTest
+    PathReferencePointCalculatorTest.cpp
+)
+
+target_link_libraries(PathReferencePointCalculatorTest
+    PathReferencePointCalculator
+    PathDataProvider
+    ${GTEST_LIBRARIES}
+)
+
 gtest_discover_tests(PathDataProviderTest)
 gtest_discover_tests(CarStateDataProviderTest)
 gtest_discover_tests(PathPointFinderTest) 
 gtest_discover_tests(CrossingPointCalculatorTest)
+gtest_discover_tests(PathReferencePointCalculatorTest)
