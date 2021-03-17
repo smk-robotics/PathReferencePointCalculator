@@ -26,7 +26,9 @@ Line PerpendicularLinesCrossingPointCalculator::lineCoefficients(const PathPoint
 Line PerpendicularLinesCrossingPointCalculator::perpendicularLineCoefficients(const Line &line, 
                                                                         const CarState &carState) const noexcept {
     if (line.vertical == true) {
-        return Line(0.0, carState.y);
+        return Line(0.0, carState.y); /**< Horizontal line. */
+    } else if (line.k == 0.0f) {
+        return Line(carState.x);      /**< Vertical line. */    
     } else {
         auto k = -1.0f / line.k;
         auto b = carState.y - k * carState.x;

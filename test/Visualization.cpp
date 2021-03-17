@@ -12,6 +12,7 @@ using namespace path_data_provider;
 using namespace car_state_data_provider;
 
 constexpr uint16_t WINDOW_SIZE = 850;
+constexpr float FLOAT_MIN_VALUE = 1e-10;
 
 std::string getPathToFile(const std::string pathName) {
     std::string testFilePath = __FILE__;
@@ -33,10 +34,15 @@ std::tuple<float, float, float> scaleParameters(const std::vector<PathPoint> &pa
     }
     auto centerX = (fabs(maxX) - fabs(minX)) / 2.0f;
     auto centerY = (fabs(maxY) - fabs (minY)) / 2.0f;
-    auto scaleCoeffX = (img.cols / (fabs(maxX) + fabs(minX))) * 0.5f;
-    auto scaleCoeffY = (img.rows / (fabs(maxY) + fabs(minY))) * 0.5f;
-    auto scale = std::max(scaleCoeffX, scaleCoeffY);
-    return std::make_tuple(centerX, centerY, scale);
+    auto scaleCoeffX = 1.0f;
+    auto scaleCoeffY = 1.0f;
+    if (fabs(maxX) > FLOAT_MIN_VALUE || fabs(minX) > FLOAT_MIN_VALUE) {
+        scaleCoeffX = img.cols / (fabs(maxX) + fabs(minX)) * 0.5f;
+    }
+    if (fabs(maxY) > FLOAT_MIN_VALUE || fabs(minY) > FLOAT_MIN_VALUE) {
+        scaleCoeffY = img.rows / (fabs(maxY) + fabs(minY)) * 0.5f;
+    }
+    return std::make_tuple(centerX, centerY, std::max(scaleCoeffX, scaleCoeffY));
 }
 
 void drawPath(const std::vector<PathPoint> &path, const std::string windowName, const cv::Mat &img) {
@@ -45,7 +51,7 @@ void drawPath(const std::vector<PathPoint> &path, const std::string windowName, 
     float sFactor = 1.0f;
     std::tie(centroidX, centroidY, sFactor) = scaleParameters(path, img);
     for (auto i = 0; i < path.size(); i++) {
-        if (i== 0) {
+        if (i == 0) {
             continue;
         }
         cv::Point segmentStartPoint(img.cols / 2 + (path.at(i - 1).x - centroidX) * sFactor, 

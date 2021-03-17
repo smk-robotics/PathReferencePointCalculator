@@ -33,15 +33,10 @@ struct Line {
      * @attention If pass wrong paramaneters, will create default vertical line.
      */
     Line(const float kCoeff, const float bCoeff) {
-        if (kCoeff == 0.0f && bCoeff == 0.0f) {
-            std::cerr << "[ERROR] - Line creating fail. k and b coefficients equals 0."<< std::endl;
-            Line();
-        } else {
             k = kCoeff;
             b = bCoeff;
             x0 = 0.0f;
             vertical = false;
-        }
     };
     /**
      * @brief Construct a new Line object

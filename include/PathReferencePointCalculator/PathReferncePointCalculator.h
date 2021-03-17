@@ -32,6 +32,24 @@ public:
      * @return PathPoint Refernce point on given path. 
      */
     [[nodiscard]] std::optional<PathPoint> pathReferencePoint(const CarState &carState) noexcept;
+    /**
+     * @brief pointOutOfSegment function.
+     * @param[in] point Point that need to be checked.
+     * @param[in] sStartPoint Path segment start point.
+     * @param[in] sFinishPoint Path segment finish point.
+     * @return true If point is out of given path segment.
+     * @return false It point is part of given path segment.
+     */
+    [[nodiscard]] bool pointOutOfSegment(const PathPoint &point, const PathPoint &sStartPoint, 
+                                         const PathPoint &sFinishPoint) const noexcept;
+    /**
+     * @brief squareDistanceToPoint function.
+     * @param[in] point1 First point for distance calculation.
+     * @param[in] point2 Second point for distance calculation.
+     * @return float Square distance between given points.
+     */
+    [[nodiscard]] float squareDistanceToPoint(const PathPoint &point1, const PathPoint &point2) const noexcept;
+
 private:
     std::shared_ptr<PathPointFinderInterface> mPathPointFinder; /**< Finds guiding point on given path. */
     std::shared_ptr<CrossingPointCalculatorInterface> mCrossingPointCalculator; /**< Finds crossing point between path 
